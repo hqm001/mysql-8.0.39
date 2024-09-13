@@ -2552,6 +2552,10 @@ class THD : public MDL_context_owner,
   */
   THD *next_to_commit;
 
+  /* For group commit optimization */
+  mysql_cond_t thr_cond_lock;
+  bool thr_cond_lock_inited;
+
   /**
     The member is served for marking a query that CREATEs or ALTERs
     a table declared with a TIMESTAMP column as dependent on

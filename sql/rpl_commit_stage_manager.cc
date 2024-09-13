@@ -341,11 +341,7 @@ bool Commit_stage_manager::enroll_for(StageID stage, THD *thd,
     if (leader_await_preempt_status) mysql_cond_signal(&m_cond_preempt);
 #endif
     while (thd->tx_commit_pending) {
-      if (stage == COMMIT_ORDER_FLUSH_STAGE) {
-        mysql_cond_wait(&m_stage_cond_commit_order, &m_lock_done);
-      } else {
-        mysql_cond_wait(&m_stage_cond_binlog, &m_lock_done);
-      }
+      mysql_cond_wait(&thd->thr_cond_lock, &m_lock_done);
     }
 
     mysql_mutex_unlock(&m_lock_done);
@@ -380,7 +376,7 @@ bool Commit_stage_manager::enroll_for(StageID stage, THD *thd,
       CONDITIONAL_SYNC_POINT_FOR_TIMESTAMP(
           "before_commit_order_leader_waits_for_binlog_leader");
       while (thd->tx_commit_pending)
-        mysql_cond_wait(&m_stage_cond_commit_order, &m_lock_done);
+        mysql_cond_wait(&thd->thr_cond_lock, &m_lock_done);
       mysql_mutex_unlock(&m_lock_done);
 
       leader = false;
@@ -462,19 +458,14 @@ void Commit_stage_manager::process_final_stage_for_ordered_commit_group(
   }
 }
 
-void Commit_stage_manager::signal_done(THD *queue, StageID stage) {
+void Commit_stage_manager::signal_done(THD *queue, StageID stage [[maybe_unused]]) {
   mysql_mutex_lock(&m_lock_done);
 
   for (THD *thd = queue; thd; thd = thd->next_to_commit) {
     thd->tx_commit_pending = false;
     thd->rpl_thd_ctx.binlog_group_commit_ctx().reset();
+    mysql_cond_broadcast(&thd->thr_cond_lock);
   }
-
-  /* if thread belong to commit order wake only commit order queue threads */
-  if (stage == COMMIT_ORDER_FLUSH_STAGE)
-    mysql_cond_broadcast(&m_stage_cond_commit_order);
-  else
-    mysql_cond_broadcast(&m_stage_cond_binlog);
 
   mysql_mutex_unlock(&m_lock_done);
 }

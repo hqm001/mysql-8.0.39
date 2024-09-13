@@ -824,6 +824,7 @@ THD::THD(bool enable_plugins)
 
   m_internal_handler = nullptr;
   m_binlog_invoker = false;
+  thr_cond_lock_inited = false;
   memset(&m_invoker_user, 0, sizeof(m_invoker_user));
   memset(&m_invoker_host, 0, sizeof(m_invoker_host));
 
@@ -1443,6 +1444,10 @@ THD::~THD() {
 
   mysql_cond_destroy(&COND_thr_lock);
   mysql_cond_destroy(&COND_group_replication_connection_cond_var);
+  if (thr_cond_lock_inited) {
+    mysql_cond_destroy(&thr_cond_lock);
+    thr_cond_lock_inited = false;
+  }
 #ifndef NDEBUG
   dbug_sentry = THD_SENTRY_GONE;
 #endif
