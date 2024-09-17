@@ -468,7 +468,6 @@ static inline trx_id_t find_smallest_short_active_trx_id(
 }
 
 void ReadView::copy_short_trx_ids() {
-  ut_ad(!m_cloned);
   ut_ad(trx_sys_mutex_own());
 
   unsigned char *short_trx_id_bitmap = trx_sys->short_rw_trx_ids_bitmap;
