@@ -18,7 +18,7 @@ These improvements are designed to enhance MySQL’s performance in high-through
 
 Users interested in conducting comparative tests are encouraged to do so on high-spec machines, utilizing BenchmarkSQL for testing.
 
-## Notice
+## Note
 
 - The better the hardware environment, the greater the performance gap with the official version as concurrency increases.
 - Use testing tools that closely resemble the online environment, such as BenchmarkSQL, to effectively showcase performance advantages. If possible, utilize [TCPCopy](https://github.com/session-replay-tools/tcpcopy). to replicate online traffic for testing.
@@ -28,6 +28,7 @@ Users interested in conducting comparative tests are encouraged to do so on high
 - Due to differences in the underlying data format of Paxos communication, it is incompatible with the official version during runtime, but compatible when offline. A restart of all official nodes is required to complete the transition.
 - When compiling, it's best to use PGO (Profile-Guided Optimization) to significantly enhance MySQL's performance. You can refer to the performance improvements in release versions 8.0.40 and above.
 - For the improved Group Replication, we also have a highly mature middleware to provide support. For more details, refer to the project at [MySQL Proxy](https://github.com/advancedmysql/mysql-proxy).
+- For more information, refer to the main project: [mysql](https://github.com/advancedmysql/mysql).
 
 ## References
 
