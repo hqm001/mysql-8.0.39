@@ -21,12 +21,13 @@ Users interested in conducting comparative tests are encouraged to do so on high
 ## Notice
 
 - The better the hardware environment, the greater the performance gap with the official version as concurrency increases.
-- Use testing tools that closely resemble the online environment, such as BenchmarkSQL, to effectively showcase performance advantages. If possible, utilize TCPCopy to replicate online traffic for testing.
+- Use testing tools that closely resemble the online environment, such as BenchmarkSQL, to effectively showcase performance advantages. If possible, utilize [TCPCopy](https://github.com/session-replay-tools/tcpcopy). to replicate online traffic for testing.
 - In weaker hardware environments, it is advisable to test with low concurrency, with BenchmarkSQL being the best option for these scenarios.
 - During testing, the concurrency limit should not exceed 1000, as the current throttling mechanism has not been open-sourced.
 - It is recommended to align MySQL configuration parameters with our settings, making adjustments based on the specific hardware.
 - Due to differences in the underlying data format of Paxos communication, it is incompatible with the official version during runtime, but compatible when offline. A restart of all official nodes is required to complete the transition.
 - When compiling, it's best to use PGO (Profile-Guided Optimization) to significantly enhance MySQL's performance. You can refer to the performance improvements in release versions 8.0.40 and above.
+- For the improved Group Replication, we also have a highly mature middleware to provide support. For more details, refer to the project at [MySQL Proxy](https://github.com/advancedmysql/mysql-proxy).
 
 ## References
 
