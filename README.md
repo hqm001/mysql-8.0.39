@@ -36,3 +36,7 @@ For detailed principles and mechanisms behind our improvements, please refer to 
 ## Bugs and Feature Requests
 
 MySQL continues to offer numerous optimization opportunities of significant interest. If users experience any performance-related issues during actual use, [please open a new issue](https://github.com/advancedmysql/mysql-8.0.39/issues). Before submitting a new issue, please check for any existing ones.
+
+## Copyright and License
+
+Copyright 2024 under [GPLv2](LICENSE).
