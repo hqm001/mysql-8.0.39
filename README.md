@@ -26,16 +26,16 @@ Users interested in conducting comparative tests are encouraged to do so on high
 - For high availability, we adopted the single-primary mode of Group Replication but removed the conflict detection part, making it a fully state machine-based approach.
 - Due to differences in the underlying data format of Paxos communication, it is incompatible with the official version during runtime, but compatible when offline. A restart of all nodes is required to complete the transition.
 - When compiling, it's best to use PGO (Profile-Guided Optimization) to significantly enhance MySQL's performance. You can refer to the performance improvements in release versions 8.0.40 and above.
-- For the improved Group Replication, we also have a highly mature middleware to provide support. For more details, refer to the project at [MySQL Proxy](https://github.com/advancedmysql/mysql-proxy).
-- For more information, refer to the main project: [mysql](https://github.com/advancedmysql/mysql).
+- For the improved Group Replication, we also have a highly mature middleware to provide support. For more details, refer to the project at [Cetus](https://github.com/enhancedformysql/cetus).
+- For more information, refer to the main project: [enhancedformysql](https://github.com/enhancedformysql/enhancedformysql).
 
 ## References
 
-For detailed principles and mechanisms behind our improvements, please refer to the following book：[The Art of Problem-Solving in Software Engineering:How to Make MySQL Better](https://advancedmysql.github.io/The-Art-of-Problem-Solving-in-Software-Engineering_How-to-Make-MySQL-Better/)
+For detailed principles and mechanisms behind our improvements, please refer to the following book：[The Art of Problem-Solving in Software Engineering:How to Make MySQL Better](https://enhancedformysql.github.io/The-Art-of-Problem-Solving-in-Software-Engineering_How-to-Make-MySQL-Better/)
 
 ## Bugs and Feature Requests
 
-MySQL continues to offer numerous optimization opportunities of significant interest. If users experience any performance-related issues during actual use, [please open a new issue](https://github.com/advancedmysql/mysql-8.0.39/issues). Before submitting a new issue, please check for any existing ones.
+MySQL continues to offer numerous optimization opportunities of significant interest. If users experience any performance-related issues during actual use, [please open a new issue](https://github.com/enhancedformysql/mysql-8.0.39/issues). Before submitting a new issue, please check for any existing ones.
 
 ## Copyright and License
 
